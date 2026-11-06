@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2a1560">
+<title>Торт для Вероники</title>
+<style>
+:root{--ink:#fff;--soft:rgba(255,255,255,.14);--acc:#ffd36e;--c1:#f7c6d9;--c2:#fff4f8;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:radial-gradient(circle at 50% 0,#6a2c91 0,#2a1560 55%,#160a38 100%) fixed;text-align:center;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#2a1560;z-index:10}
+main{max-width:480px;margin:0 auto;padding:14px 14px 28px}
+h1{font-size:clamp(22px,6.5vw,30px);margin:6px 0 2px;letter-spacing:.2px}
+.sub{opacity:.85;font-size:14px;margin:0 0 4px}
+.count{display:inline-block;margin:6px 0 10px;padding:5px 14px;border-radius:99px;background:var(--soft);font-size:13px;color:var(--acc)}
+.hint{font-size:13px;opacity:.8;margin:0 0 8px}
+.stage{position:relative;width:100%;aspect-ratio:300/270;touch-action:none;user-select:none;-webkit-user-select:none;border-radius:20px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.stage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.it{position:absolute;transform:translate(-50%,-50%);font-size:clamp(22px,7.4vw,34px);line-height:1;cursor:grab;touch-action:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+.it.pop{animation:pop .25s ease-out}
+@keyframes pop{from{transform:translate(-50%,-50%) scale(.3)}to{transform:translate(-50%,-50%) scale(1)}}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:fl .35s ease-in-out infinite alternate}
+.off .flame{display:none}
+@keyframes fl{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.9,1.12) rotate(3deg)}}
+.panel{margin-top:12px;padding:12px;border-radius:18px;background:var(--soft);backdrop-filter:blur(6px)}
+.panel h2{margin:0 0 8px;font-size:13px;font-weight:600;opacity:.8;text-transform:uppercase;letter-spacing:.8px}
+.row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{width:46px;height:46px;border-radius:14px;border:2px solid transparent;background:rgba(255,255,255,.1);font-size:24px;color:inherit;cursor:pointer;padding:0}
+.chip.on{border-color:var(--acc);background:rgba(255,211,110,.22)}
+.sw{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;padding:0}
+.sw.on{border-color:#fff}
+.btns{display:flex;gap:8px;margin-top:12px}
+.btn{flex:1;padding:12px 6px;border:0;border-radius:14px;font:600 14px inherit;font-family:inherit;color:#2a1560;background:var(--acc);cursor:pointer}
+.btn.g{background:var(--soft);color:var(--ink)}
+.btn:active{transform:scale(.97)}
+.msg{margin-top:14px;font-size:15px;min-height:22px;color:var(--acc)}
+.conf{position:fixed;top:-20px;font-size:22px;pointer-events:none;z-index:20;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.9}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Вероника, с 20-летием!</h1>
+  <p class="sub">6 сентября 2027</p>
+  <div class="count" id="count"></div>
+  <p class="hint">✦ Выбери украшение и коснись торта. Тяни — двигай, двойной тап — убери</p>
+
+  <div class="stage" id="stage">
+    <svg viewBox="0 0 300 270" aria-hidden="true">
+      <ellipse cx="150" cy="248" rx="135" ry="16" fill="rgba(255,255,255,.22)"/>
+      <rect x="38" y="160" width="224" height="84" rx="16" style="fill:var(--c1)"/>
+      <rect x="38" y="160" width="224" height="20" rx="10" style="fill:var(--c2)"/>
+      <rect x="75" y="104" width="150" height="58" rx="14" style="fill:var(--c1)"/>
+      <rect x="75" y="104" width="150" height="18" rx="9" style="fill:var(--c2)"/>
+      <g id="candles">
+        <text x="118" y="104" font-size="58" font-weight="800" text-anchor="middle" fill="#ffd36e" stroke="#e8a93a" stroke-width="2">2</text>
+        <text x="182" y="104" font-size="58" font-weight="800" text-anchor="middle" fill="#ffd36e" stroke="#e8a93a" stroke-width="2">0</text>
+        <path class="flame" d="M118 28c7 9 8 15 0 21c-8-6-7-12 0-21z" fill="#ff9a2e"/>
+        <path class="flame" d="M118 36c3 4 3 7 0 9c-3-2-3-5 0-9z" fill="#fff3a0"/>
+        <path class="flame" d="M182 28c7 9 8 15 0 21c-8-6-7-12 0-21z" fill="#ff9a2e"/>
+        <path class="flame" d="M182 36c3 4 3 7 0 9c-3-2-3-5 0-9z" fill="#fff3a0"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="panel">
+    <h2>Украшения</h2>
+    <div class="row" id="tools"></div>
+  </div>
+  <div class="panel">
+    <h2>Крем</h2>
+    <div class="row" id="colors"></div>
+  </div>
+
+  <div class="btns">
+    <button class="btn" id="rand">✦ Украсить случайно</button>
+    <button class="btn g" id="undo" aria-label="Отменить">↶</button>
+    <button class="btn g" id="clear" aria-label="Очистить">🗑</button>
+  </div>
+  <div class="btns"><button class="btn" id="blow">🎂 Загадать желание и задуть свечи</button></div>
+  <div class="msg" id="msg"></div>
+</main>
+
+<script>
+(function(){
+  var TOOLS=["🍓","🍒","🌸","⭐","💖","🕰️","📷","✨","🎀","🍫","🧁","🎞️"];
+  var COLORS=[["#f7c6d9","#fff4f8"],["#c9a27e","#f0dcc5"],["#8a5a44","#e9c9a8"],["#bcd8f7","#f3f9ff"],["#d9c2f5","#faf3ff"]];
+  var stage=document.getElementById("stage"),svg=stage.querySelector("svg");
+  var tools=document.getElementById("tools"),colors=document.getElementById("colors");
+  var cur=TOOLS[0],items=[],lastTap=0,lastEl=null;
+
+  TOOLS.forEach(function(e,i){
+    var b=document.createElement("button");b.className="chip"+(i?"":" on");b.textContent=e;
+    b.onclick=function(){cur=e;[].forEach.call(tools.children,function(c){c.classList.remove("on")});b.classList.add("on")};
+    tools.appendChild(b);
+  });
+  COLORS.forEach(function(c,i){
+    var b=document.createElement("button");b.className="sw"+(i?"":" on");b.style.background="linear-gradient(135deg,"+c[1]+","+c[0]+")";
+    b.setAttribute("aria-label","Цвет крема "+(i+1));
+    b.onclick=function(){document.documentElement.style.setProperty("--c1",c[0]);document.documentElement.style.setProperty("--c2",c[1]);[].forEach.call(colors.children,function(x){x.classList.remove("on")});b.classList.add("on")};
+    colors.appendChild(b);
+  });
+
+  function add(e,x,y){
+    var el=document.createElement("span");el.className="it pop";el.textContent=e;
+    el.style.left=x+"%";el.style.top=y+"%";stage.appendChild(el);items.push(el);
+  }
+  stage.addEventListener("click",function(ev){
+    if(ev.target.closest(".it"))return;
+    var r=stage.getBoundingClientRect();
+    add(cur,(ev.clientX-r.left)/r.width*100,(ev.clientY-r.top)/r.height*100);
+  });
+
+  var drag=null;
+  stage.addEventListener("pointerdown",function(ev){
+    var el=ev.target.closest(".it");if(!el)return;
+    var now=Date.now();
+    if(lastEl===el&&now-lastTap<350){remove(el);lastEl=null;return}
+    lastEl=el;lastTap=now;drag=el;el.classList.remove("pop");
+    try{el.setPointerCapture(ev.pointerId)}catch(e){}
+    ev.preventDefault();
+  });
+  stage.addEventListener("pointermove",function(ev){
+    if(!drag)return;
+    var r=stage.getBoundingClientRect();
+    var x=Math.max(2,Math.min(98,(ev.clientX-r.left)/r.width*100));
+    var y=Math.max(2,Math.min(98,(ev.clientY-r.top)/r.height*100));
+    drag.style.left=x+"%";drag.style.top=y+"%";
+  });
+  function end(){drag=null}
+  stage.addEventListener("pointerup",end);stage.addEventListener("pointercancel",end);
+  function remove(el){var i=items.indexOf(el);if(i>-1)items.splice(i,1);el.remove()}
+
+  document.getElementById("undo").onclick=function(){var el=items.pop();if(el)el.remove()};
+  document.getElementById("clear").onclick=function(){items.forEach(function(e){e.remove()});items=[]};
+  document.getElementById("rand").onclick=function(){
+    for(var i=0;i<9;i++){
+      var e=TOOLS[Math.floor(Math.random()*TOOLS.length)];
+      var top=Math.random()<.4;
+      add(e,top?32+Math.random()*36:16+Math.random()*68,top?50+Math.random()*10:64+Math.random()*26);
+    }
+  };
+
+  var msg=document.getElementById("msg"),blown=false;
+  document.getElementById("blow").onclick=function(){
+    var c=document.getElementById("candles");
+    blown=!blown;svg.classList.toggle("off",blown);
+    if(blown){
+      msg.textContent="Пусть всё загаданное сбудется, Вероника! 🎉";
+      var em=["🎉","✨","🎊","💖","⭐","🕰️"];
+      for(var i=0;i<42;i++){
+        var s=document.createElement("span");s.className="conf";s.textContent=em[i%em.length];
+        s.style.left=Math.random()*100+"vw";s.style.animationDuration=(2.5+Math.random()*2.5)+"s";
+        s.style.animationDelay=(Math.random()*.8)+"s";document.body.appendChild(s);
+        setTimeout(function(n){n.remove()},6500,s);
+      }
+    }else{msg.textContent="Свечи снова горят ✨"}
+  };
+
+  var d=new Date(),t=new Date(2027,8,6),n=Math.ceil((t-new Date(d.getFullYear(),d.getMonth(),d.getDate()))/864e5);
+  document.getElementById("count").textContent=n>0?"До дня рождения: "+n+" дн.":(n===0?"Сегодня день рождения! 🎂":"С днём рождения! 🎂");
+})();
+</script>
+</body>
+</html>
